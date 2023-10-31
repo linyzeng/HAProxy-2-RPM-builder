@@ -8,6 +8,11 @@ on:
 
   workflow_dispatch:
 
+env:
+  NO_SUDO: 1
+  #DAY_OF_WEEK: Monday
+  
+
 jobs:
   build_centos:
     runs-on: ubuntu-latest
