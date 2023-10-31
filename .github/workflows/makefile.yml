@@ -48,10 +48,11 @@ jobs:
 
     - name: check for new builds
       run: ls
-    
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+
+    - name: 'Upload Package'
+      uses: actions/upload-artifact@v1
       with:
-        name: Binary RPM
-        path: rpmbuild/RPMS/x86_64/*.x86_64.rpm
+        name: nuget
+        path: ${{ github.workspace }}/rpmbuild/RPMS/x86_64/*.x86_64.rpm
+    
       
