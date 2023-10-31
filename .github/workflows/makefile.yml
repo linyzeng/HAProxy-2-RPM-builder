@@ -52,6 +52,6 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: artifact_${{ matrix.os }}_${{ matrix.configs }}.
-        path: rpmbuild/RPMS/x86_64/*.rpm
+        name: Binary RPM
+        path: rpmbuild/RPMS/x86_64/*.x86_64.rpm
       
