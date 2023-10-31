@@ -46,6 +46,9 @@ jobs:
       id: rpm
       run: make USE_PROMETHEUS=1
 
+    - name: check for new builds
+      run: ls
+    
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
