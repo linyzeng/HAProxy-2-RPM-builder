@@ -53,6 +53,6 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: nuget
-        path: ${{ github.workspace }}/rpmbuild/RPMS/x86_64/*.x86_64.rpm
+        path: ${{ github.workspace }}/../rpmbuild/RPMS/x86_64/*.x86_64.rpm
     
       
