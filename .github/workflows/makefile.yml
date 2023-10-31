@@ -1,16 +1,24 @@
-name: Makefile CI
+name: CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ master ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ master ]
+
+  workflow_dispatch:
 
 jobs:
-  build:
-
+  build_centos:
     runs-on: ubuntu-latest
-    container: docker.io/centos:7
+
+    strategy:
+      matrix:
+        container: ["centos:7"]
+
+    container:
+      image: ${{ matrix.container }}
+      
     steps:
     - name: checkout
       uses: actions/checkout@v3
