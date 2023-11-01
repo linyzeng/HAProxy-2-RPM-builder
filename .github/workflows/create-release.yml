@@ -1,16 +1,10 @@
 name: CI
 
-
 on:
   push:
-    tags:
-    - "v[0-9]+.[0-9]+.[0-9]+"
-
-#on:
-#  push:
-#    branches: [ master ]
-#  pull_request:
-#    branches: [ master ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
   workflow_dispatch:
 
@@ -59,57 +53,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: my-artifact
-        path: rpmbuild/RPMS/x86_64/*.x86_64.rpm   
-
-    #- name: Release
-    #  uses: docker://antonyurchenko/git-release:v5
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.TOKEN }}
-    #  with:
-    #    args: rpmbuild/RPMS/x86_64/*.x86_64.rpm     
-
-    - name: Build RPM and SRPM packages
-      id: rpm_build
-      uses: AnjaloHettiarachchi/rpmbuild@v1.0.0
-      with:
-        spec_file: "SPECS/haproxy.spec"
-    
-    - name: Create a new release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        body: |
-          Changes in this Release
-              - Create RPM
-              - Upload Source RPM
-        draft: false
-        prerelease: false
-    
-    - name: Upload RPM as a release asset
-      id: upload_rpm_release
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ steps.rpm_build.outputs.rpm_path }}
-        asset_name: ${{ steps.rpm_build.outputs.rpm_name }}
-        asset_content_type: ${{ steps.rpm_build.outputs.content_type }}
-    
-    - name: Upload SRPM as a release asset
-      id: upload_srpm_release
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ steps.rpm_build.outputs.srpm_path }}
-        asset_name: ${{ steps.rpm_build.outputs.srpm_name }}
-        asset_content_type: ${{ steps.rpm_build.outputs.content_type }}
-
-    
-      
+        path: rpmbuild/RPMS/x86_64/*.x86_64.rpm 
