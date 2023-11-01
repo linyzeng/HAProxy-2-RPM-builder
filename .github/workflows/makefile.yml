@@ -47,7 +47,7 @@ jobs:
       run: make USE_PROMETHEUS=1
 
     - name: check for new builds
-      run: ls RPMS/
+      run: ls -trl
 
     - name: 'Upload Package'
       uses: actions/upload-artifact@v1
