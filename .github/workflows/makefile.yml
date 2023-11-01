@@ -42,18 +42,18 @@ jobs:
     #- name: Run check
     #  run: make check
 
-    - name: Run distcheck
+    - name: Run builds
       id: rpm
       run: make USE_PROMETHEUS=1
 
     - name: check for new builds
-      run: pwd && ls -trl rpmbuild/RPMS
+      run: pwd && ls -trl rpmbuild/RPMS/x86_64
 
     - name: 'Upload Package'
       uses: actions/upload-artifact@v1
       with:
         name: nuget
-        path: RPMS/*.x86_64.rpm
+        path: RPMS/x86_64/*.x86_64.rpm
         #${{ github.workspace }}/../rpmbuild/RPMS/x86_64/*.x86_64.rpm
     
       
