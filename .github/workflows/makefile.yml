@@ -50,10 +50,10 @@ jobs:
       run: pwd && ls -trl rpmbuild/RPMS/x86_64
 
     - name: 'Upload Package'
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
-        name: nuget
-        path: RPMS/x86_64/*.x86_64.rpm
-        #${{ github.workspace }}/../rpmbuild/RPMS/x86_64/*.x86_64.rpm
+        name: my-artifact
+        path: ${{ github.workspace }}/RPMS/x86_64/*.x86_64.rpm   
+
     
       
