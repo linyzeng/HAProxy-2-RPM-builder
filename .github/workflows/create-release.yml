@@ -1,10 +1,16 @@
 name: CI
 
+
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
+    - "v[0-9]+.[0-9]+.[0-9]+"
+
+#on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
 
   workflow_dispatch:
 
@@ -54,6 +60,13 @@ jobs:
       with:
         name: my-artifact
         path: rpmbuild/RPMS/x86_64/*.x86_64.rpm   
+
+    - name: Release
+      uses: docker://antonyurchenko/git-release:v5
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        args: rpmbuild/RPMS/x86_64/*.x86_64.rpm     
 
     
       
